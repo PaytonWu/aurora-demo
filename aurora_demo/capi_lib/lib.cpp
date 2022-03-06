@@ -28,6 +28,7 @@ void signer_account_pk(uint64_t register_id) {
     return;
 }
 void predecessor_account_id(uint64_t register_id) {
+    vl.predecessor_account_id(register_id);
     return;
 }
 void input(uint64_t register_id) {

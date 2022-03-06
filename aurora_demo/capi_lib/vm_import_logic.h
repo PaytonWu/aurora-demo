@@ -31,6 +31,10 @@ public:
         internal_write_register(register_id, m_context.account_id);
     }
 
+    void predecessor_account_id(uint64_t register_id) {
+        internal_write_register(register_id, m_context.predecessor_account_id);
+    }
+
     void input(uint64_t register_id) {
         internal_write_register(register_id, m_context.input);
         return;
@@ -68,9 +72,9 @@ private:
 
 private:
     void internal_write_register(uint64_t register_id, std::vector<uint8_t> const & context_input) {
-        printf("[internal_write_register]before write register size: %zu\n", m_registers.size());
-        m_registers.insert({register_id, context_input});
-        printf("[internal_write_register]after write register size: %zu\n", m_registers.size());
+        printf("[internal_write_register]before write register(%llu) size: %zu\n", register_id, m_registers.size());
+        m_registers[register_id] = context_input;
+        printf("[internal_write_register]after write register(%llu) size: %zu\n", register_id, m_registers.size());
         for (auto const & _p : m_registers) {
             printf("[debug][internal_write_register] after debug: %zu : ", _p.first);
             for (auto const & _c : _p.second) {
